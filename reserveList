@@ -1,0 +1,48 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	$sql="select * from reservetbl where userid='".$_GET['userid']."'";
+	//echo $sql;
+	$ret = mysqli_query($con,$sql);
+	$count=mysqli_num_rows($ret);
+	//echo $count;
+?>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+	<h1>예약 신청내역</h1>
+	<table bgcolor="black" cellspacing="1" cellpadding="2">
+		<tr bgcolor="lightcyan" align="center">
+			<td>순번</td><td>수령자 이름</td><td>수령자 주소</td><td>수령자 상세주소</td>
+			<td>수령자 전화번호</td><td>무게</td><td>취급주의 여부</td><td>택배업체 수령날짜</td>
+		</tr>
+<?php
+	$no=1;
+	while($row=mysqli_fetch_array($ret)){
+?>		
+		<tr bgcolor="white" align="center">
+			<td><?php echo $no++ ?></td>
+			<td><?php echo $row['recname'] ?></td>
+			<td><?php echo $row['readdr'] ?></td>
+			<td><?php echo $row['redetaddr'] ?></td>
+			<td><?php echo $row['remobile'] ?></td>
+			<td><?php echo $row['weight'] ?></td>
+			<td><?php echo $row['vul'] ?></td>
+			<td><?php echo $row['time'] ?></td>
+		</tr>
+<?php
+	}
+	if($count==0){
+		echo "<tr bgcolor=white align=center><td colspan=8>예약 신청내역이 없습니다</td></tr>";
+	}
+	mysqli_close($con);
+?>	
+	</table>
+	<br> <a href="main.html">[초기화면]</a>
+	&nbsp;&nbsp;<a href="list.php">[회원목록]</a>
+</body>
+
+</html>
