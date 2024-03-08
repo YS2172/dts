@@ -1,0 +1,24 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	$userid=$_POST["userid"];
+	$username=$_POST["username"];
+	$birthyear=$_POST["birthyear"];
+	$gender=$_POST['gender'];
+	$addr=$_POST["addr"];
+	$detaddr=$_POST["detaddr"];
+	$mobile=$_POST["mobile"];
+	$company=$_POST["company"];
+	$mdate= date("Y-m-j");
+	
+	$sql="insert into usertbl values('".$userid."','".$username."',".$birthyear.",'".$gender."','".$addr."','".$detaddr."','".$mobile."','".$company."','".$mdate."')";
+	$ret = mysqli_query($con,$sql);
+	echo "<h1>신규 회원 입력 결과</h1>";
+	if($ret){
+		echo "데이터가 성공적으로 입력됨";
+	}else{
+		echo "데이터 입력 실패"."<br>";
+		echo "실패원인 : ".mysqli_error($con);
+	}
+	mysqli_close($con);
+	echo "<br><a href='main.html'>[초기화면]</a>";
+?>
