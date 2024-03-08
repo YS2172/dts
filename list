@@ -1,0 +1,48 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	$sql="select * from usertbl";
+	$ret = mysqli_query($con,$sql);
+?>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+	<h1><a href="main.html"><img src="img/logo.jpg" width=4% height=5%></a>
+	&nbsp&nbsp회원 검색 결과</h1>
+	<table bgcolor="black" cellspacing="1" cellpadding="2">
+		<tr bgcolor="lightcyan" align="center">
+			<td>순번</td><td>아이디</td><td>이름</td><td>출생연도</td>
+			<td>성별</td><td>지역</td><td>상세주소</td><td>전화번호</td><td>택배사<td>가입일</td>
+			<td>예약내역</td><td>수정</td><td>삭제</td>
+		</tr>
+<?php
+	$no=1;
+	while($row=mysqli_fetch_array($ret)){
+?>		
+		<tr bgcolor="white" align="center">
+			<td><?php echo $no++?></td>
+			<td><?php echo $row['userid'] ?></td>
+			<td><?php echo $row['username'] ?></td>
+			<td><?php echo $row['birthyear'] ?></td>
+			<td><?php echo $row['gender'] ?></td>
+			<td><?php echo $row['addr'] ?></td>
+			<td><?php echo $row['detaddr'] ?></td>
+			<td><?php echo $row['mobile'] ?></td>
+			<td><?php echo $row['company'] ?></td>
+			<td><?php echo $row['mdate'] ?></td>
+			<td><a href=reserve_list.php?userid=<?php echo $row['userid'] ?>>배달예약목록</a></td>
+			<td><a href=update.php?userid=<?php echo $row['userid'] ?>>수정</a></td>
+			<td><a href=delete.php?userid=<?php echo $row['userid'] ?>>삭제</a></td>
+		</tr>
+<?php
+	}
+	mysqli_close($con);
+?>	
+	</table>
+	<br> <a href="main.html">[초기화면]</a>&nbsp&nbsp<a href="list2.php">[택배사별 순서]</a>
+</body>
+
+</html>
