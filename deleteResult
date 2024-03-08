@@ -1,0 +1,18 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	
+	$userid=$_POST["userid"];
+	//$sql="select * from usertbl where userid='".$_GET['userid']."'";
+	$sql="delete from usertbl where userid='".$userid."'"; 
+	$ret = mysqli_query($con,$sql);
+	//$row=mysqli_fetch_array($ret);
+	echo "<H1>회원 정보 삭제 결과</H1>";
+	if($ret){
+		echo "데이터가 성공적으로 삭제됨";
+	}else{
+		echo "데이터가 삭제 실패!!!<br>";
+		echo "실패원인 : ".mysqli_error($con);
+	}
+	mysqli_close($con);
+	echo "<br><a href=list.php>[회원목록]</a>";
+?>
