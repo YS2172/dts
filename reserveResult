@@ -1,0 +1,23 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	$userid=$_POST["userid"];
+	$recname=$_POST["recname"];
+	$weight=$_POST["weight"];
+	$vul=$_POST["vul"];
+	$readdr=$_POST["readdr"];
+	$redetaddr=$_POST["redetaddr"];
+	$remobile=$_POST["remobile"];
+	$time=$_POST["time"];
+	
+	$sql="insert into reservetbl values(null,'".$userid."','".$weight."','".$vul."','".$recname."','".$readdr."','".$redetaddr."','".$remobile."','".$time."')";
+	$ret = mysqli_query($con,$sql);
+	echo "<h1>택배 배달 예약 신청 결과</h1>";
+	if($ret){
+		echo "데이터가 성공적으로 입력됨";
+	}else{
+		echo "데이터 입력 실패"."<br>";
+		echo "실패원인 : ".mysqli_error($con);
+	}
+	mysqli_close($con);
+	echo "<br><a href='main.html'>[초기화면]</a>";
+?>
