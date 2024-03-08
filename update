@@ -1,0 +1,89 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	$sql="select * from usertbl where userid='".$_GET['userid']."'";
+	$ret = mysqli_query($con,$sql);
+	$row=mysqli_fetch_array($ret);
+	$userid=$row["userid"];
+	$username=$row["username"];
+	$birthyear=$row["birthyear"];
+	$addr=$row["addr"];
+	$detaddr=$row["detaddr"];
+	$gender=$row["gender"];
+	$company=$row["company"];
+	$mobile=$row["mobile"];
+?>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+	<h1>회원 정보 수정</h1>
+	<form method="post" action="update_result.php">
+	<table bgcolor=black cellspacing=1 cellpadding=2>
+		<tr bgcolor=white>
+			<td bgcolor=lightcyan>아이디</td>
+			<td><input type="text" name="userid" value=<?php echo $userid ?> readonly></td>
+		</tr>
+		<tr bgcolor=white>
+			<td bgcolor=lightcyan>이름<font color="red">*</font></td><td><input type="text" name="username" value=<?php echo $username ?>></td>
+		</tr>
+		<tr bgcolor=white>
+			<td bgcolor=lightcyan>출생연도</td><td><input type="text" name="birthyear" value=<?php echo $birthyear ?>></td>
+		</tr>
+		<tr bgcolor=white><td bgcolor=lightcyan>성별</td>
+			<td><input type=radio name=gender value="남성" <?php if ($gender=='남성') echo "checked" ?>>남성
+				<input type=radio name=gender value="여성" <?php if ($gender=='여성') echo "checked" ?>>여성
+			</td></tr>
+		<!--<tr>
+			<td>주소</td><td><input type="text" name="addr" value=<?php echo $addr ?>></td>
+		</tr>-->
+		<tr bgcolor=white>
+			<td bgcolor=lightcyan>지역<font color="red">*</font></td>
+			<td><select name =addr>
+				<option value="">지역을 선택하세요</option>
+				<option value="서울" <?php if ($addr=='서울') echo "selected" ?>>서울</option>
+				<option value="경기" <?php if ($addr=='경기') echo "selected" ?>>경기</option>
+				<option value="충남" <?php if ($addr=='충남') echo "selected" ?>>충남</option>
+				<option value="충북" <?php if ($addr=='충북') echo "selected" ?>>충북</option>
+				<option value="경남" <?php if ($addr=='경남') echo "selected" ?>>경남</option>
+				<option value="경북" <?php if ($addr=='경북') echo "selected" ?>>경북</option>
+				<option value="전남" <?php if ($addr=='전남') echo "selected" ?>>전남</option>
+				<option value="전북" <?php if ($addr=='전북') echo "selected" ?>>전북</option>
+				<option value="강원" <?php if ($addr=='강원') echo "selected" ?>>강원</option>
+				<option value="제주" <?php if ($addr=='제주') echo "selected" ?>>제주</option>
+				<option value="기타" <?php if ($addr=='기타') echo "selected" ?>>기타</option>
+			</select>
+			</td>
+		</tr>
+		<tr bgcolor=white>
+			<td bgcolor=lightcyan>상세주소<font color="red">*</font></td>
+			<td><textarea name="detaddr"><?php echo $detaddr ?></textarea></td>
+		</tr>
+		<tr bgcolor=white>
+			<td bgcolor=lightcyan>전화번호<font color="red">*</font></td><td><input type="text" name="mobile" value=<?php echo $mobile ?>></td>
+		</tr>
+		<tr bgcolor=white>
+			<td bgcolor=lightcyan>택배사</td>
+			<td><select name =company>
+				<option value="">선호하는 택배사를 골라주세요</option>
+				<option value="우체국" <?php if ($company=='우체국') echo "selected" ?>>우체국</option>
+				<option value="경동" <?php if ($company=='경동') echo "selected" ?>>경동</option>
+				<option value="한진" <?php if ($company=='한진') echo "selected" ?>>한진</option>
+				<option value="로젠" <?php if ($company=='로젠') echo "selected" ?>>로젠</option>
+				<option value="CJ대한통운" <?php if ($company=='CJ대한통운') echo "selected" ?>>CJ대한통운</option>
+				<option value="기타" <?php if ($company=='기타') echo "selected" ?>>기타</option>
+			</select>
+			</td>
+		</tr>
+	</table>	
+	<font color=blue size=1>선호하시는 택배사가 따로 있을시, 추가로 홈페이지에 돌아가 택배사를 추가등록해주세요.</font>
+	<br>
+	<br> <a href="list.php">[회원목록]</a>
+	
+	<input type="submit" value="수정">
+	</form>
+</body>
+
+</html>
