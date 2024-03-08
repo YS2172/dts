@@ -1,0 +1,19 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	$userid=$_POST["userid"];
+	$newcomp=$_POST["newcomp"];
+	
+	$sql="insert into newtbl values('".$userid."','".$newcomp."')";
+	$sql2="update usertbl set company='".$newcomp."' where userid='".$userid."'";
+	$ret = mysqli_query($con,$sql);
+	$ret2=mysqli_query($con,$sql2);
+	echo "<h1>택배사 추가 등록 결과</h1>";
+	if($ret){
+		echo "데이터가 성공적으로 입력됨";
+	}else{
+		echo "데이터 입력 실패"."<br>";
+		echo "실패원인 : ".mysqli_error($con);
+	}
+	mysqli_close($con);
+	echo "<br><a href='main.html'>[초기화면]</a>";
+?>
