@@ -1,0 +1,58 @@
+create table userTBL(
+	userid char(8) not null primary key,
+    username char(10) not null,
+    birthyear int,
+    gender char(2),
+    addr char(2) not null,
+    detaddr char(30) not null,
+    mobile char(13) not null,
+    company char(10),
+    mdate date
+);
+insert into usertbl values('PEB','박은빈',1992,'여성','서울','강남구 도산대로 102길 17 3층','010-0000-1111','우체국','2012-03-23');
+insert into usertbl values('YSY','윤시윤',1986,'남성','경기','용인시 처인구 포곡읍 에버랜드로 199','010-1111-2222',null,'2017-04-23');
+insert into usertbl values('CEW','차은우',1997,'남성','서울','강남구 삼성로 648 2층','010-2222-3333','경동','2018-03-03');
+insert into usertbl values('BSJ','배수지',1994,'여성','전남','여수시 돌산읍 돌산로 3600-1','010-3333-4444','한진','2014-05-12');
+insert into usertbl values('LJW','이진욱',1981,'남성','강원','춘천시 남산면 남이섬길 1','010-4444-5555',null,'2016-03-19');
+insert into usertbl values('SSK','신세경',1990,'여성','서울','송파구 위례성대로 106 1층','010-5555-6666','로젠','2013-07-21');
+insert into usertbl values('JS','지성',1977,'남성','경기','광주시 도척면 도웅리 산 33','010-6666-7777','우체국','2012-11-29');
+insert into usertbl values('HJM','한지민',1982,'여성','서울','강남구 논현로 142길 35','010-7777-8888','한진','2017-12-21');
+insert into usertbl values('GS','고수',1978,'남성','전북','전주시 완산구 풍남동3가 64-1','010-8888-9999','CJ대한통운','2017-09-05');
+create table reserveTBL(
+	num int auto_increment not null primary key,
+    userid char(8) not null,
+    weight char(10),
+    vul char(1),
+    recname char(10) not null,
+    readdr char(2) not null,
+    redetaddr char(30) not null,
+    remobile char(13) not null,
+    time date not null,
+    foreign key (userid) references usertbl (userid)
+);
+insert into reservetbl values(null,'PEB','500g','X','박보영','충남','보령시 머드로 123','010-1122-2211','2022-04-12');
+insert into reservetbl values(null,'PEB',null,null,'고아라','충북','보은군 속리산면 법주사로 84','010-2233-3322','2023-06-10');
+insert into reservetbl values(null,'JS',null,'O','김지은','경북','포항시 북구 여남동','010-3344-4433','2021-06-21');
+insert into reservetbl values(null,'LJW','500g',null,'임윤아','서울','성동구 왕십리로 83-21','010-4455-5544','2022-09-16');
+insert into reservetbl values(null,'YSY','1kg','X','정유미','제주','서귀포시 대정읍 에듀시티로 178','010-5566-6655','2022-02-06');
+insert into reservetbl values(null,'PEB','300g','X','송지효','서울','마포구 희우정로1길 7','010-6677-7766','2023-01-02');
+insert into reservetbl values(null,'LJW','2kg','O','강하늘','서울','강남구 언주로 147길 42 3층','010-7788-8877','2022-07-18');
+insert into reservetbl values(null,'SSK',null,'X','나인우','경기','동두천시 천보산로 567-12','010-8899-9988','2021-10-26');
+insert into reservetbl values(null,'SSK','1.5kg',null,'남궁민','전남','순천시 순천만길 513-25','010-9900-0099','2020-09-10');
+insert into reservetbl values(null,'HJM',null,'X','김우빈','전북','전주시 덕진구 소리로 68','010-0011-1100','2019-11-07');
+insert into reservetbl values(null,'PEB','200g',null,'유승호','서울','종로구 사직로 161','010-1234-5678','2018-12-04');
+create table newTBL(
+	userid char(8) not null,
+    newcomp char(10) not null,
+    foreign key (userid) references usertbl(userid)
+);
+insert into newtbl values('YSY','경동');
+insert into newtbl values('LJW','대한항공');
+create table askTBL(
+	title char(15),
+    descript char(250)
+);
+insert into asktbl values('배달 시간','배달 시간은 업체사정에 따라 임의로 정해집니다');
+insert into asktbl values('배송 오류','배송 오류 발생시 02-9999-9999로 문의해주세요');
+insert into asktbl values('배달 변경','배달 변경을 원하신다면 02-9999-9999로 문의해주세요');
+insert into asktbl values('대한민국 배달 서비스','대한민국은 세계에서 각종 배달 서비스가, 개중에서도 음식 배달 서비스가 독보적으로 발달한 나라다. 주문과 배달의 전 과정이 간단하고 신속하며, 타국에서는 배달이 까다로운 것으로 여겨지는 온갖 품목들이 배달 가능하다. 이에 배달부들이나 배달 서비스 문화에 익숙한 한국인들이 농담 삼아 "우리 민족은 배달의 민족"이라고 자칭하기도 하며, 대중적 스마트폰 음식 배달 앱 중 이 농담을 인용한 배달의민족이라는 이름의 앱도 있다.');
