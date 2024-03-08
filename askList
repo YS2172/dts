@@ -1,0 +1,37 @@
+
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	$sql="select title from asktbl";
+	$ret = mysqli_query($con,$sql);
+?>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+	<h1>FAQ</h1>
+	<form method="post" action="ask_new.php">
+	<table bgcolor="black" cellspacing="1" cellpadding="2">
+		<tr bgcolor="lightcyan" align="center">
+			<td>순번</td><td>제목</td>
+		</tr>
+<?php
+	$no=1;
+	while($row=mysqli_fetch_array($ret)){
+?>		
+		<tr bgcolor="white" align="center">
+			<td><?php echo $no++?></td>
+			<td><a href="ask_content.php?title=<?php echo $row['title'] ?>"><?php echo $row['title']?></a></td>
+		</tr>
+<?php
+	}
+	mysqli_close($con);
+?>	
+	</table>
+	<br> <a href="main.html">[초기화면]</a>&nbsp<input type=submit value="작성">
+	</form>
+</body>
+
+</html>
