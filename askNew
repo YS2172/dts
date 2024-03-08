@@ -1,0 +1,23 @@
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+		
+<body>
+	<h1>FAQ 입력</h1>
+	<form method="post" action="ask_new_result.php">
+	<table bgcolor="gray" cellspacing="0.5" cellpadding="2">
+		<tr><td><input type="text" name="title" placeholder="제목"></td></tr>
+		</table><br>
+		<!--<tr bgcolor=white><td></td><tr>-->
+		<table bgcolor="gray" cellspacing="0.5" cellpadding="2">
+		<tr><td><textarea name="descript" placeholder="내용" rows=20 style=width:250px></textarea></td></tr>
+	</table>
+	<br><br> <a href="ask_list.php">[FAQ 목록]</a>
+	
+	<input type="submit" value="저장">
+	</form>
+</body>
+
+</html>
