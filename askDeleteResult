@@ -1,0 +1,17 @@
+<?php
+	$con = mysqli_connect("localhost","projectuser","1234","32222711") or die("MySQL 접속 실패!!");
+	
+	$title=$_POST["title"];
+	$sql="delete from asktbl where title='".$title."'"; 
+	$ret = mysqli_query($con,$sql);
+	//$row=mysqli_fetch_array($ret);
+	echo "<H1>FAQ 삭제 결과</H1>";
+	if($ret){
+		echo "데이터가 성공적으로 삭제됨";
+	}else{
+		echo "데이터가 삭제 실패!!!<br>";
+		echo "실패원인 : ".mysqli_error($con);
+	}
+	mysqli_close($con);
+	echo "<br><a href=ask_list.php>[FAQ 목록]</a>";
+?>
